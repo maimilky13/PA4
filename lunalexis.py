@@ -14,6 +14,7 @@ def clean_and_tokenize(text):
     tokens = jieba.cut(text, cut_all=False)
     return " ".join(tokens)
 
+
 # ตั้งค่า Sidebar สำหรับกรอก API Key
 st.sidebar.title("API Settings")
 api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
