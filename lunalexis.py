@@ -12,7 +12,8 @@ if api_key:
     
     if st.button("Send to OpenAI"):
         try:
-            response = openai.ChatCompletion.create(
+            # ใช้ฟังก์ชันใหม่ของ OpenAI API
+            response = openai.ChatCompletion.chat_create(
                 model="gpt-3.5-turbo",
                 messages=[{"role": "user", "content": user_prompt}]
             )
