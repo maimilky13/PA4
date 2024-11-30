@@ -4,7 +4,6 @@ import pandas as pd
 import jieba
 from pypinyin import pinyin, Style
 import re
-import openai.error
 
 # ฟังก์ชันสำหรับการตัดคำและคลีนคำ
 def clean_and_tokenize(text):
