@@ -1,22 +1,20 @@
 import streamlit as st
 import openai
 
-# ตั้งค่า Sidebar สำหรับใส่ API Key
+# Sidebar สำหรับกรอก API Key
 st.sidebar.title("API Settings")
 api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 
 if api_key:
-    # ตั้งค่า API Key
     openai.api_key = api_key
-
     st.title("Test OpenAI API Key 🔑")
-
-    # Input สำหรับ prompt
+    
+    # กล่องข้อความสำหรับใส่ prompt
     user_prompt = st.text_input("Enter a prompt to test OpenAI API:", "Hello, how are you?")
     
     if st.button("Send to OpenAI"):
         try:
-            # เรียกใช้งาน OpenAI ChatCompletion
+            # ใช้ OpenAI API
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
@@ -24,12 +22,13 @@ if api_key:
                     {"role": "user", "content": user_prompt}
                 ]
             )
-            # แสดงผลลัพธ์จาก OpenAI
+            # แสดงผลลัพธ์
             st.subheader("Response from OpenAI:")
             st.write(response.choices[0].message["content"].strip())
-        except openai.error.AuthenticationError:
-            st.error("Invalid API Key. Please check your API Key.")
         except Exception as e:
-            st.error(f"An error occurred: {e}")
+            if "authentication" in str(e).lower():
+                st.error("Invalid API Key! Please check and try again.")
+            else:
+                st.error(f"An error occurred: {e}")
 else:
     st.warning("Please enter your OpenAI API key in the sidebar.")
