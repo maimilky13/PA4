@@ -1,8 +1,8 @@
 import streamlit as st
 import openai
 import pandas as pd
-import jieba  # ไลบรารีสำหรับตัดคำภาษาจีน
-from pypinyin import pinyin, Style  # ไลบรารีสำหรับแปลงข้อความจีนเป็นพินอิน
+import jieba  
+from pypinyin import pinyin, Style  
 import re
 
 # ฟังก์ชันสำหรับการตัดคำและคลีนคำ
@@ -14,7 +14,6 @@ def clean_and_tokenize(text):
     tokens = jieba.cut(text, cut_all=False)
     return " ".join(tokens)
 
-
 # ตั้งค่า Sidebar สำหรับกรอก API Key
 st.sidebar.title("API Settings")
 api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
@@ -22,13 +21,19 @@ api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
 if api_key:
     openai.api_key = api_key
 
-    st.title("NLP Application with Preprocessing")
+    st.title("LunaLexis 🌖")
+    st.subheader("Introduction to the App 🥮")
+    st.text("Welcome to the NLP Application with Preprocessing, an interactive tool designed\nto assist learners and enthusiasts of the Chinese language in exploring and\nanalyzing text. This application integrates advanced natural language processing\ntechniques with OpenAI's GPT capabilities to deliver a comprehensive\nsuite of features, including:")
+    st.text(' ')
+    st.text("1. Pinyin Conversion\n2. Summarization\n3. HSK Vocabulary Extraction")
+    st.text(' ')
+    st.text('This app is perfect for language learners, educators, and anyone looking to gain\ndeeper insights into Chinese text, whether for study or personal interest.')
 
     # ส่วนสำหรับกรอกข้อความด้วยมือ
-    st.header("Manual Input")
+    st.header("Manual Input 🐉")
     user_input = st.text_area("Enter your Chinese text here:", height=150)
     # เพิ่มตัวเลือกระดับความยาก HSK
-    st.subheader("Select HSK Level")
+    st.subheader("Select HSK Level 🐉")
     hsk_level = st.selectbox("Choose the HSK difficulty level (1-6):", ["HSK 1", "HSK 2", "HSK 3", "HSK 4", "HSK 5", "HSK 6"])
 
     if st.button("Process Manual Input"):
@@ -40,9 +45,9 @@ if api_key:
                 # 2. แปลงข้อความเป็นพินอิน
                 pinyin_text = ' '.join([syllable[0] for syllable in pinyin(user_input, style=Style.TONE)])
 
-                # 3. สรุปเนื้อหาและแปลเป็นภาษาไทย
+                # 3. สรุปเนื้อหาและแปลเป็นภาษาอังกฤษ
                 response = openai.ChatCompletion.create(
-    model="gpt-4",  # หรือ "gpt-4"
+    model="gpt-4", 
     messages=[{"role": "user", "content": f"Please summarize the following Chinese article into English, focusing on the main ideas and key information: {user_input}"}],
 )
                 summary_text = response['choices'][0]['message']['content'].strip()
@@ -54,10 +59,10 @@ if api_key:
                         {
                             "role": "user",
                             "content": f"""
- 
-
-Extract 10 interesting keywords from the following Chinese text. Each keyword must strictly match the {hsk_level} level as defined by the official HSK vocabulary standard. Avoid words outside this level. Format the response as a table with '|' separating columns, and include the following columns:
-
+Extract 10 interesting keywords from the following Chinese text. 
+Each keyword must strictly match the {hsk_level} level as defined by the official HSK vocabulary standard. 
+Avoid words outside this level. 
+Format the response as a table with '|' separating columns.
 
 Here is an example for HSK 1 level:
 你好          | nǐ hǎo  | hello  
@@ -102,15 +107,13 @@ Text:
                         st.warning("No keywords were extracted. Please check the input or API response format.")
                         df_keywords = pd.DataFrame(columns=["Chinese Word", "Pinyin", "English Translation"])  # DataFrame ว่าง
                 # แสดงผลลัพธ์
-                st.subheader("Results")
-                # st.write(f"**Cleaned and Tokenized Text:** {cleaned_text}")
-                st.subheader("Pinyin")
+                st.subheader("Pinyin 🧧")
                 st.write(f"{pinyin_text}")
 
-                st.subheader("Summary (English)")
+                st.subheader("Summary (English) 🥢")
                 st.write(f"{summary_text}")
 
-                st.subheader("Interesting Keywords Table")
+                st.subheader("Interesting Keywords Table 🀄️")
                 st.dataframe(df_keywords)
 
             except Exception as e:
