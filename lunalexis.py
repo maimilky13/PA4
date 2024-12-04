@@ -14,14 +14,14 @@ def clean_and_tokenize(text):
     tokens = jieba.cut(text, cut_all=False)
     return " ".join(tokens)
 
-# ตั้งค่าให้กรอก API Key ในส่วนหลักของหน้า
 st.title("LunaLexis 🌖")
 st.subheader("Introduction to the App 🥮")
-st.text("Welcome to the NLP Application with Preprocessing, an interactive tool designed\nto assist learners and enthusiasts of the Chinese language in exploring and\nanalyzing text. This application integrates advanced natural language processing\ntechniques with OpenAI's GPT capabilities to deliver a comprehensive\nsuite of features, including:")
+st.text('Welcome to LunaLexis: The NLP Application')
+st.write("LunaLexis is an interactive tool designed to assist learners and enthusiasts of the Chinese language in exploring and analyzing text. This application integrates advanced natural language processing techniques with OpenAI's GPT capabilities to deliver a comprehensive suite of features, including:")
 st.text(' ')
-st.text("1. Pinyin Conversion\n2. Summarization\n3. HSK Vocabulary Extraction")
+st.text("1. Pinyin Conversion\n2. Summarization \n3. HSK Vocabulary Extraction")
 st.text(' ')
-st.text('This app is perfect for language learners, educators, and anyone looking to gain\ndeeper insights into Chinese text, whether for study or personal interest.')
+st.write('Additionally, LunaLexis offers the unique ability to filter and select vocabulary based on HSK levels, ranging from Level 1 (beginner) to Level 6 (advanced). This feature allows users to focus on words appropriate to their proficiency, making it a valuable resource for learners at any stage of their language journey.')
 
 st.subheader("OpenAI API key🗝️")
 api_key = st.text_input("Enter your OpenAI API key and press enter to apply", type="password")
