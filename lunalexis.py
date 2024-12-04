@@ -25,7 +25,10 @@ st.text('This app is perfect for language learners, educators, and anyone lookin
 
 
 #api_key = st.text_input("Enter your OpenAI API key and press enter to apply", type="password")
-api_key = st.markdown(
+import streamlit as st
+
+# แสดงกรอบข้อความพร้อมคำแนะนำ
+st.markdown(
     """
     <div style="
         background-color: #f0f8ff;
@@ -35,17 +38,21 @@ api_key = st.markdown(
         border: 1px solid #d3e0ea;
         ">
         <p style="color: #1e90ff; font-size: 16px;">
-            Please add your OpenAI API key to continue.
+            🔑 Please add your OpenAI API key to continue.
         </p>
     </div>
     """,
     unsafe_allow_html=True
 )
-# แสดง API Key
+
+# สร้างช่องกรอก API Key
+api_key = st.text_input("Enter your OpenAI API key:", type="password")
+
+# ตรวจสอบการกรอก API Key
 if api_key:
-    st.write("API Key has been entered successfully.")
+    st.success("API Key has been entered successfully.")
 else:
-    st.warning("Please enter your API Key to proceed.")
+    st.warning("Please enter your API Key to proceed and press enter to apply.")
 
 
 if api_key:
