@@ -114,12 +114,12 @@ Text:
                         st.warning("No keywords were extracted. Please check the input or API response format.")
                         df_keywords = pd.DataFrame(columns=["Chinese Word", "Pinyin", "English Translation"])  # DataFrame ว่าง
 
-                # แสดงผล Pinyin (สีแดงอ่อน)
+                # แสดงผล Pinyin 
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #FFE6E6;  /* พื้นหลังแดงอ่อน */
-                        border-radius: 8px;
+                        background-color: #FFE6E6;  
+                        border-radius: 20px;
                         padding: 15px;
                         margin-top: 15px;
                         border: 1px solid #FFCCCC;">
@@ -130,12 +130,12 @@ Text:
                     unsafe_allow_html=True
                 )
 
-                # แสดงผล Summary (สีทองอ่อน)
+                # แสดงผล Summary 
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #FFF9CC;  /* พื้นหลังทองอ่อน */
-                        border-radius: 8px;
+                        background-color: #FFF9CC;  
+                        border-radius: 20px;
                         padding: 15px;
                         margin-top: 15px;
                         border: 1px solid #FFE599;">
@@ -146,14 +146,14 @@ Text:
                     unsafe_allow_html=True
                 )
 
-                # แสดง DataFrame (สีฟ้าอ่อน พร้อมขนาดกรอบที่เล็กลง)
+                # แสดง DataFrame 
                 st.markdown(
                     """
                     <div style="
-                        background-color: #F0FBFF;  /* พื้นหลังฟ้าอ่อน */
-                        border-radius: 5px;  /* มุมกรอบโค้งเล็กลง */
-                        padding: 10px;  /* ลดระยะ padding */
-                        margin-top: 10px;  /* ลดช่องว่างด้านบน */
+                        background-color: #F0FBFF; 
+                        border-radius: 20px;  
+                        padding: 10px;  
+                        margin-top: 10px;  
                         border: 1px solid #B3E5FF;">
                         <h4 style="color: #1890FF; margin-bottom: 5px;">Interesting Keywords Table 🀄️</h4>
                     </div>
