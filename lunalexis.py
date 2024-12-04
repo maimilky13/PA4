@@ -14,9 +14,14 @@ def clean_and_tokenize(text):
     tokens = jieba.cut(text, cut_all=False)
     return " ".join(tokens)
 
-# ตั้งค่า Sidebar สำหรับกรอก API Key
-st.sidebar.title("API Settings")
-api_key = st.sidebar.text_input("Enter your OpenAI API key", type="password")
+# ตั้งค่าให้กรอก API Key ในส่วนหลักของหน้า
+st.title("API Settings")
+api_key = st.text_input("Enter your OpenAI API key", type="password")
+
+# แสดง API Key (สำหรับตรวจสอบเท่านั้น)
+if api_key:
+    st.write("API Key has been entered successfully.")
+
 
 if api_key:
     openai.api_key = api_key
