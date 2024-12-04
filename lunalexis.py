@@ -23,30 +23,8 @@ st.text("1. Pinyin Conversion\n2. Summarization\n3. HSK Vocabulary Extraction")
 st.text(' ')
 st.text('This app is perfect for language learners, educators, and anyone looking to gain\ndeeper insights into Chinese text, whether for study or personal interest.')
 
-
-#api_key = st.text_input("Enter your OpenAI API key and press enter to apply", type="password")
-import streamlit as st
-
-# แสดงกรอบข้อความพร้อมคำแนะนำ
-st.markdown(
-    """
-    <div style="
-        background-color: #f0f8ff;
-        border-radius: 5px;
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #d3e0ea;
-        ">
-        <p style="color: #1e90ff; font-size: 16px;">
-            🔑 Please add your OpenAI API key to continue.
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-# สร้างช่องกรอก API Key
-api_key = st.text_input("Enter your OpenAI API key:", type="password")
+st.subheader("OpenAI API key🗝️")
+api_key = st.text_input("Enter your OpenAI API key and press enter to apply", type="password")
 
 # ตรวจสอบการกรอก API Key
 if api_key:
