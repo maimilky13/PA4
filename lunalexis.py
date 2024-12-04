@@ -122,7 +122,7 @@ Text:
                         background-color: #FFE6E6;  
                         border-radius: 20px;
                         padding: 15px;
-                        margin-top: 15px;
+                        margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px solid #FFCCCC;">
                         <h4 style="color: #D9534F; margin-bottom: 10px;">Pinyin 🧧</h4>
                         <p style="font-size: 16px; line-height: 1.6; color: #333;">{pinyin_text}</p>
@@ -138,7 +138,7 @@ Text:
                         background-color: #FFF9CC;  
                         border-radius: 20px;
                         padding: 15px;
-                        margin-top: 15px;
+                        margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px solid #FFE599;">
                         <h4 style="color: #FF8C00; margin-bottom: 10px;">Summary (English) 🥢</h4>
                         <p style="font-size: 16px; line-height: 1.6; color: #333;">{summary_text}</p>
@@ -154,7 +154,7 @@ Text:
                         background-color: #F0FBFF; 
                         border-radius: 20px;  
                         padding: 10px;  
-                        margin-top: 10px;  
+                        margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px solid #B3E5FF;">
                         <h4 style="color: #1890FF; margin-bottom: 5px;">Interesting Keywords Table 🀄️</h4>
                     </div>
