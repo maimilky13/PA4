@@ -37,7 +37,7 @@ if api_key:
     openai.api_key = api_key
 
     # ส่วนสำหรับกรอกข้อความด้วยมือ
-    st.header("Chinese Text (Manual Input) 🐉")
+    st.subheader("Chinese Text (Manual Input) 🐉")
     user_input = st.text_area("Enter your Chinese text here:", height=200)
 
     # เพิ่มตัวเลือกระดับความยาก HSK
