@@ -15,7 +15,16 @@ def clean_and_tokenize(text):
     return " ".join(tokens)
 
 # ตั้งค่าให้กรอก API Key ในส่วนหลักของหน้า
-st.title("API Settings")
+st.title("LunaLexis 🌖")
+st.subheader("Introduction to the App 🥮")
+st.text("Welcome to the NLP Application with Preprocessing, an interactive tool designed\nto assist learners and enthusiasts of the Chinese language in exploring and\nanalyzing text. This application integrates advanced natural language processing\ntechniques with OpenAI's GPT capabilities to deliver a comprehensive\nsuite of features, including:")
+st.text(' ')
+st.text("1. Pinyin Conversion\n2. Summarization\n3. HSK Vocabulary Extraction")
+st.text(' ')
+st.text('This app is perfect for language learners, educators, and anyone looking to gain\ndeeper insights into Chinese text, whether for study or personal interest.')
+
+
+st.subheader("API Settings")
 api_key = st.text_input("Enter your OpenAI API key", type="password")
 
 # แสดง API Key (สำหรับตรวจสอบเท่านั้น)
@@ -26,13 +35,12 @@ if api_key:
 if api_key:
     openai.api_key = api_key
 
-    st.title("LunaLexis 🌖")
-    st.subheader("Introduction to the App 🥮")
-    st.text("Welcome to the NLP Application with Preprocessing, an interactive tool designed\nto assist learners and enthusiasts of the Chinese language in exploring and\nanalyzing text. This application integrates advanced natural language processing\ntechniques with OpenAI's GPT capabilities to deliver a comprehensive\nsuite of features, including:")
-    st.text(' ')
-    st.text("1. Pinyin Conversion\n2. Summarization\n3. HSK Vocabulary Extraction")
-    st.text(' ')
-    st.text('This app is perfect for language learners, educators, and anyone looking to gain\ndeeper insights into Chinese text, whether for study or personal interest.')
+    # st.title("LunaLexis 🌖")
+    # st.subheader("Introduction to the App 🥮")
+    # st.text("Welcome to the NLP Application with Preprocessing, an interactive tool designed\nto assist learners and enthusiasts of the Chinese language in exploring and\nanalyzing text. This application integrates advanced natural language processing\ntechniques with OpenAI's GPT capabilities to deliver a comprehensive\nsuite of features, including:")
+    # st.text("1. Pinyin Conversion\n2. Summarization\n3. HSK Vocabulary Extraction")
+    # st.text(' ')
+    # st.text('This app is perfect for language learners, educators, and anyone looking to gain\ndeeper insights into Chinese text, whether for study or personal interest.')
 
     # ส่วนสำหรับกรอกข้อความด้วยมือ
     st.header("Manual Input 🐉")
