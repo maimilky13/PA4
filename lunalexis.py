@@ -113,16 +113,16 @@ Text:
                     else:
                         st.warning("No keywords were extracted. Please check the input or API response format.")
                         df_keywords = pd.DataFrame(columns=["Chinese Word", "Pinyin", "English Translation"])  # DataFrame ว่าง
-                        
+
                 # แสดงผล Pinyin (สีแดงอ่อน)
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #FFC1C1;
+                        background-color: #FFE6E6;  /* พื้นหลังแดงอ่อน */
                         border-radius: 8px;
                         padding: 15px;
                         margin-top: 15px;
-                        border: 1px solid #FF9999;">
+                        border: 1px solid #FFCCCC;">
                         <h4 style="color: #D9534F; margin-bottom: 10px;">Pinyin 🧧</h4>
                         <p style="font-size: 16px; line-height: 1.6; color: #333;">{pinyin_text}</p>
                     </div>
@@ -134,11 +134,11 @@ Text:
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #FFD700;
+                        background-color: #FFF9CC;  /* พื้นหลังทองอ่อน */
                         border-radius: 8px;
                         padding: 15px;
                         margin-top: 15px;
-                        border: 1px solid #FFC107;">
+                        border: 1px solid #FFE599;">
                         <h4 style="color: #FF8C00; margin-bottom: 10px;">Summary (English) 🥢</h4>
                         <p style="font-size: 16px; line-height: 1.6; color: #333;">{summary_text}</p>
                     </div>
@@ -146,16 +146,16 @@ Text:
                     unsafe_allow_html=True
                 )
 
-                # แสดง DataFrame (สีฟ้าอ่อน)
+                # แสดง DataFrame (สีฟ้าอ่อน พร้อมขนาดกรอบที่เล็กลง)
                 st.markdown(
                     """
                     <div style="
-                        background-color: #E6F7FF;
-                        border-radius: 8px;
-                        padding: 15px;
-                        margin-top: 15px;
-                        border: 1px solid #91D5FF;">
-                        <h4 style="color: #1890FF; margin-bottom: 10px;">Interesting Keywords Table 🀄️</h4>
+                        background-color: #F0FBFF;  /* พื้นหลังฟ้าอ่อน */
+                        border-radius: 5px;  /* มุมกรอบโค้งเล็กลง */
+                        padding: 10px;  /* ลดระยะ padding */
+                        margin-top: 10px;  /* ลดช่องว่างด้านบน */
+                        border: 1px solid #B3E5FF;">
+                        <h4 style="color: #1890FF; margin-bottom: 5px;">Interesting Keywords Table 🀄️</h4>
                     </div>
                     """,
                     unsafe_allow_html=True
