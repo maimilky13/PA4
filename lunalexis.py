@@ -120,10 +120,12 @@ Text:
                             if len(parts) == 3 and parts[0] != "Keyword":
                                 keywords_list.append(parts)
 
-                    # ตรวจสอบว่ามีคำศัพท์ในตารางหรือไม่
                     if keywords_list:
                         df_keywords = pd.DataFrame(keywords_list, columns=[
                                                    "Chinese Word", "Pinyin", "English Translation"])
+                        df_keywords.index = df_keywords.index + 1  # เริ่ม index จาก 1
+                        df_keywords.reset_index(inplace=True)
+                        df_keywords.rename(columns={'index': 'No.'}, inplace=True)
 
                     else:
                         st.warning(
