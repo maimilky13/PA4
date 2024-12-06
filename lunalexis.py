@@ -5,9 +5,15 @@ import jieba
 from pypinyin import pinyin, Style
 import re
 
+# ฟังก์ชันสำหรับการตัดคำและคลีนคำ
+
+
 def clean_and_tokenize(text):
+    # ลบสัญลักษณ์พิเศษและช่องว่างที่ไม่จำเป็น
+    # เก็บเฉพาะตัวอักษรภาษาจีนและช่องว่าง
     text = re.sub(r"[^\u4e00-\u9fff\s]", "", text)
-    text = re.sub(r"\s+", " ", text).strip()  
+    text = re.sub(r"\s+", " ", text).strip()  # ลบช่องว่างเกินจำเป็น
+    # ตัดคำด้วย jieba
     tokens = jieba.cut(text, cut_all=False)
     return " ".join(tokens)
 
@@ -21,10 +27,11 @@ st.text("1. Pinyin Conversion\n2. Summarization \n3. HSK Vocabulary Extraction")
 st.text(' ')
 st.write('Additionally, LunaLexis offers the unique ability to filter and select vocabulary based on HSK levels, ranging from Level 1 (beginner) to Level 6 (advanced). This feature allows users to focus on words appropriate to their proficiency, making it a valuable resource for learners at any stage of their language journey.')
 
-st.subheader("OpenAI API key 🗝️")
+st.subheader("OpenAI API key🗝️")
 api_key = st.text_input(
     "Enter your OpenAI API key and press enter to apply", type="password")
 
+# ตรวจสอบการกรอก API Key
 if api_key:
     st.success("API Key has been entered successfully.")
 else:
@@ -34,9 +41,11 @@ else:
 if api_key:
     openai.api_key = api_key
 
+    # ส่วนสำหรับกรอกข้อความด้วยมือ
     st.subheader("Chinese Text (Manual Input) 🐉")
     user_input = st.text_area("Enter your Chinese text here:", height=200)
 
+    # เพิ่มตัวเลือกระดับความยาก HSK
     st.subheader("Select HSK Level 🐉")
     hsk_level = st.selectbox("Choose the HSK difficulty level (1-6):",
                              ["HSK 1", "HSK 2", "HSK 3", "HSK 4", "HSK 5", "HSK 6"])
@@ -44,11 +53,14 @@ if api_key:
     if st.button("Process Manual Input"):
         if user_input.strip():
             try:
+                # 1. ตัดคำและคลีนข้อความ
                 cleaned_text = clean_and_tokenize(user_input)
 
+                # 2. แปลงข้อความเป็นพินอิน
                 pinyin_text = ' '.join(
                     [syllable[0] for syllable in pinyin(user_input, style=Style.TONE)])
 
+                # 3. สรุปเนื้อหาและแปลเป็นภาษาอังกฤษ
                 response = openai.ChatCompletion.create(
                     model="gpt-4",
                     messages=[
@@ -57,6 +69,7 @@ if api_key:
                 summary_text = response['choices'][0]['message']['content'].strip(
                 )
 
+                # 4. เลือกคำศัพท์ที่น่าสนใจและแปลเป็นภาษาไทย
                 keyword_response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
@@ -89,72 +102,78 @@ Text:
                 keywords_table = keyword_response['choices'][0]['message']['content'].strip(
                 )
 
+                # ตรวจสอบว่าผลลัพธ์มีข้อมูลหรือไม่
                 if not keywords_table.strip():
                     st.error(
                         "No response from OpenAI API. Please check the input or API key.")
                     df_keywords = pd.DataFrame(
+                        # DataFrame ว่าง
                         columns=["Chinese Word", "Pinyin", "English Translation"])
 
                 else:
+                    # แปลงตารางผลลัพธ์เป็น DataFrame
                     keywords_list = []
                     for line in keywords_table.split("\n"):
-                        if "|" in line:  
+                        if "|" in line:  # ใช้ '|' เป็นตัวแบ่งคอลัมน์
                             parts = [col.strip() for col in line.split("|")]
+                            # ตรวจสอบว่ามี 3 คอลัมน์
                             if len(parts) == 3 and parts[0] != "Keyword":
                                 keywords_list.append(parts)
 
+                    # ตรวจสอบว่ามีคำศัพท์ในตารางหรือไม่
                     if keywords_list:
                         df_keywords = pd.DataFrame(keywords_list, columns=[
                                                    "Chinese Word", "Pinyin", "English Translation"])
-                        df_keywords.index = range(1, len(df_keywords) + 1)
 
                     else:
                         st.warning(
                             "No keywords were extracted. Please check the input or API response format.")
                         df_keywords = pd.DataFrame(
+                            # DataFrame ว่าง
                             columns=["Chinese Word", "Pinyin", "English Translation"])
-                        
+
+                # แสดงผล Pinyin
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #2A3F5E;
+                        background-color: #FFE6E6;
                         border-radius: 20px;
                         padding: 15px;
-                        margin: 20px 0;  
-                        border: 1px solid black;">
-                        <h4 style="color: #D8C8B8; margin-bottom: 10px;">Pinyin 🧧</h4>
-                        <p style="font-size: 16px; line-height: 1.6;">{pinyin_text}</p>
-
+                        margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
+                        border: 1px solid #FFCCCC;">
+                        <h4 style="color: #D9534F; margin-bottom: 10px;">Pinyin 🧧</h4>
+                        <p style="font-size: 16px; line-height: 1.6; color: #333;">{pinyin_text}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
 
-                clean_summary = re.sub(r'<[^>]*>', '', summary_text)
+                # แสดงผล Summary
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #042D29;
+                        background-color: #FFF9CC;
                         border-radius: 20px;
                         padding: 15px;
-                        margin: 20px 0;  
-                        border: 1px solid black;">
-                        <h4 style="color: #D8C8B8; margin-bottom: 10px;">Summary (English) 🥢</h4>
-                        <p style="font-size: 16px; line-height: 1.6;">{clean_summary}</p>
+                        margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
+                        border: 1px solid #FFE599;">
+                        <h4 style="color: #FF8C00; margin-bottom: 10px;">Summary (English) 🥢</h4>
+                        <p style="font-size: 16px; line-height: 1.6; color: #333;">{summary_text}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
 
+                # แสดง DataFrame
                 st.markdown(
                     """
                     <div style="
-                        background-color: #451011; 
+                        background-color: #F0FBFF; 
                         border-radius: 20px;  
                         padding: 10px;  
-                        margin: 20px 0;  
-                        border: 1px solid black;">
-                        <h4 style="color: #D8C8B8; margin-bottom: 5px;">Interesting Keywords Table 🀄️</h4>
+                        margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
+                        border: 1px solid #B3E5FF;">
+                        <h4 style="color: #1890FF; margin-bottom: 5px;">Interesting Keywords Table 🀄️</h4>
                     </div>
                     """,
                     unsafe_allow_html=True
