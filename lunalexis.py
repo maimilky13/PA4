@@ -152,6 +152,7 @@ Text:
 
                 # แสดงผล Summary
                 clean_summary = re.sub(r"<[^>]*>", "", summary_text).strip()
+                clean_summary = re.sub(r"\s+", " ", clean_summary).strip()
 
                 st.markdown(
                     f"""
@@ -162,7 +163,9 @@ Text:
                         margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px solid #000000;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Summary (English) 🥢</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: white;">{clean_summary}</p>
+                        <p style="font-size: 16px; line-height: 1.6; color: white; font-family: Arial, sans-serif;">
+                        {clean_summary}
+                        </p>
                     </div>
                     """,
                     unsafe_allow_html=True
