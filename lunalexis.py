@@ -114,8 +114,8 @@ Text:
                         df_keywords = pd.DataFrame(
                             columns=["Chinese Word", "Pinyin", "English Translation"])
                         
-                clean_pinyin = re.sub(r"<[^>]*>", "", pinyin_text).replace("\xa0", " ").strip()
-                clean_summary = re.sub(r"<[^>]*>", "", summary_text).replace("\xa0", " ").strip()
+                #clean_pinyin = re.sub(r"<[^>]*>", "", pinyin_text).replace("\xa0", " ").strip()
+                #clean_summary = re.sub(r"<[^>]*>", "", summary_text).replace("\xa0", " ").strip()
 
                 st.markdown(
                     f"""
@@ -128,7 +128,7 @@ Text:
                         color: white; 
                         font-family: Arial, sans-serif;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Pinyin 🧧</h4>
-                        <p style="font-size: 16px; line-height: 1.6;">{clean_pinyin}</p>
+                        <p style="font-size: 16px; line-height: 1.6;">{pinyin_text}</p>
 
                     </div>
                     """,
@@ -146,7 +146,7 @@ Text:
                         color: white; 
                         font-family: Arial, sans-serif;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Summary (English) 🥢</h4>
-                        <p style="font-size: 16px; line-height: 1.6;">{clean_summary}</p>
+                        <p style="font-size: 16px; line-height: 1.6;">{summary_text}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
