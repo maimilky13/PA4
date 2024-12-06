@@ -134,6 +134,7 @@ Text:
 
                 # แสดงผล Pinyin
                 clean_pinyin = re.sub(r"<[^>]*>", "", pinyin_text).strip()
+                clean_pinyin = re.sub(r"\s+", " ", clean_pinyin).strip()
 
                 st.markdown(
                     f"""
@@ -144,7 +145,9 @@ Text:
                         margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px solid #000000;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Pinyin 🧧</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: white ;">{clean_pinyin}</p>
+                        <p style="font-size: 16px; line-height: 1.6; color: white ; font-family: Arial, sans-serif;">
+                        {clean_pinyin}
+                        </p>
                     </div>
                     """,
                     unsafe_allow_html=True
