@@ -113,7 +113,9 @@ Text:
                             "No keywords were extracted. Please check the input or API response format.")
                         df_keywords = pd.DataFrame(
                             columns=["Chinese Word", "Pinyin", "English Translation"])
-
+                        
+                clean_pinyin = re.sub(r'<[^>]*>', '', pinyin_text) 
+                clean_pinyin = clean_pinyin.replace('\xa0', ' ').strip()
                 st.markdown(
                     f"""
                     <div style="
@@ -122,14 +124,18 @@ Text:
                         padding: 15px;
                         margin: 20px 0;  
                         border: 1px solid black;">
+                        color: white; 
+                        font-family: Arial, sans-serif;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Pinyin 🧧</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: white;">{pinyin_text}</p>
+                        <p style="font-size: 16px; line-height: 1.6;">{clean_pinyin}</p>
+
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
 
                 clean_summary = re.sub(r'<[^>]*>', '', summary_text)
+                clean_summary = clean_summary.replace('\xa0', ' ') 
                 st.markdown(
                     f"""
                     <div style="
@@ -138,8 +144,10 @@ Text:
                         padding: 15px;
                         margin: 20px 0;  
                         border: 1px solid black;">
+                        color: white; 
+                        font-family: Arial, sans-serif;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Summary (English) 🥢</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: white;">{clean_summary}</p>
+                        <p style="font-size: 16px; line-height: 1.6;">{clean_summary}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
