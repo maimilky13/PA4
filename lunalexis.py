@@ -142,7 +142,7 @@ Text:
                         margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px #000000;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Pinyin 🧧</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: #333;">{pinyin_text}</p>
+                        <p style="font-size: 16px; line-height: 1.6; color: white ;">{pinyin_text}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -157,8 +157,9 @@ Text:
                         padding: 15px;
                         margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
                         border: 1px #000000;">
+                        color: white;
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Summary (English) 🥢</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: #333;">{summary_text}</p>
+                        <p style="font-size: 16px; line-height: 1.6; color: white;">{summary_text}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
