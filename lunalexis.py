@@ -60,6 +60,8 @@ Please summarize the following Chinese text into English. Your summary should:
 1. Focus on the key points and main ideas of the text.
 2. Avoid directly translating the text word for word.
 3. Use concise and clear language to convey the essence of the text.
+4. Limit the summary to to 50-100 words. Ensure it captures the main points clearly.
+
 Text:
 {user_input}
 """
