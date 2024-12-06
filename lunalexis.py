@@ -133,6 +133,8 @@ Text:
                             columns=["Chinese Word", "Pinyin", "English Translation"])
 
                 # แสดงผล Pinyin
+                clean_pinyin = re.sub(r"<[^>]*>", "", pinyin_text).strip()
+
                 st.markdown(
                     f"""
                     <div style="
@@ -140,15 +142,17 @@ Text:
                         border-radius: 20px;
                         padding: 15px;
                         margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
-                        border: 1px #000000;">
+                        border: 1px solid #000000;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Pinyin 🧧</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: white ;">{pinyin_text}</p>
+                        <p style="font-size: 16px; line-height: 1.6; color: white ;">{clean_pinyin}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
                 )
 
                 # แสดงผล Summary
+                clean_summary = re.sub(r"<[^>]*>", "", summary_text).strip()
+
                 st.markdown(
                     f"""
                     <div style="
@@ -156,9 +160,9 @@ Text:
                         border-radius: 20px;
                         padding: 15px;
                         margin: 20px 0;  /* กำหนดระยะห่างด้านบนและล่างเท่ากัน */
-                        border: 1px #000000;">
+                        border: 1px solid #000000;">
                         <h4 style="color: #D8C8B8; margin-bottom: 10px;">Summary (English) 🥢</h4>
-                        <p style="font-size: 16px; line-height: 1.6; color: white;">{summary_text}</p>
+                        <p style="font-size: 16px; line-height: 1.6; color: white;">{clean_summary}</p>
                     </div>
                     """,
                     unsafe_allow_html=True
