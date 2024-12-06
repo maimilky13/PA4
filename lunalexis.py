@@ -124,7 +124,7 @@ Text:
                     if keywords_list:
                         df_keywords = pd.DataFrame(keywords_list, columns=[
                                                    "Chinese Word", "Pinyin", "English Translation"])
-
+                        df_keywords.index = range(1, len(df_keywords) + 1)
                     else:
                         st.warning(
                             "No keywords were extracted. Please check the input or API response format.")
